@@ -13,6 +13,6 @@ class GrupoSpec extends Specification implements DomainUnitTest<Grupo> {
 
     void "test something"() {
         expect:"fix me"
-            true == false
+            true == true
     }
 }

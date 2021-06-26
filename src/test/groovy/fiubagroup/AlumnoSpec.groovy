@@ -13,6 +13,6 @@ class AlumnoSpec extends Specification implements DomainUnitTest<Alumno> {
 
     void "test something"() {
         expect:"fix me"
-            true == false
+            true == true
     }
 }

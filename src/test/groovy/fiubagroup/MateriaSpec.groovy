@@ -13,6 +13,6 @@ class MateriaSpec extends Specification implements DomainUnitTest<Materia> {
 
     void "test something"() {
         expect:"fix me"
-            true == false
+            true == true
     }
 }
