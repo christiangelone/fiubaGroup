@@ -16,6 +16,13 @@
       <label for="nombre">Nombre</label>
       <input type="text" id="nombre" name="nombre" />
       <br/>
+      <label>Materia: (Código:${materia.codigo})</label>
+      <input type="hidden" id="materiaId" name="materiaId" value="${materia.id}" />
+      <br/>
+      <label>Cuatrimestre: (Año: ${cuatrimestre.anio} Numero: ${cuatrimestre.numero})</label>
+      <input type="hidden" id="cuatrimestreId" name="cuatrimestreId" value="${cuatrimestre.id}" />
+      <br/>
+      <label>Alumnos:</label>
       <ul>
       <g:each in="${alumnosNombres}">
         <li>${it}</li>
