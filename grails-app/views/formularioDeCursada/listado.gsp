@@ -9,23 +9,23 @@
 <body>
   <h1>Mis Formularios</h1>
 
-  <table style="width:100%; text-align: center;">
-    <tr>
-      <th>Materia</th>
-      <th>Cuatrimeste</th>
-      <th>Grupo</th>
-      <th>Acciones</th>
+  <table style="width:100%; text-align: center; border: 1px solid black;">
+    <tr style="border: #000 solid 1px;">
+      <th style="border: 1px solid black;">Materia</th>
+      <th style="border: 1px solid black;">Cuatrimeste</th>
+      <th style="border: 1px solid black;">Grupo</th>
+      <th style="border: 1px solid black;">Acciones</th>
     </tr>
     <g:each in="${formularios}">
       <tr>
-        <td>Codigo: ${it.materia.codigo}</td>
-        <td>Año: ${it.cuatrimestre.anio} Número: ${it.cuatrimestre.numero}</td>
-        <td>
+        <td style="border: 1px solid black;">Codigo: ${it.materia.codigo}</td>
+        <td style="border: 1px solid black;">Año: ${it.cuatrimestre.anio} Número: ${it.cuatrimestre.numero}</td>
+        <td style="border: 1px solid black;">
         <g:if test="${it.grupo != null}">
             <a href="/grupo/${it.grupo}">${it.grupo.nombre}</a>
         </g:if>
         </td>
-        <td>
+        <td style="border: 1px solid black;">
           <g:if test="${it.grupo == null}">
             <a href="/grupo/armar?formularioId=${it.id}">Armar grupo</a>
           </g:if>
@@ -34,6 +34,7 @@
     </g:each>
   </table>
 
+  <br/>
   <a href="javascript:history.back()">Volver</a>
 
 </body>

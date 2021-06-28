@@ -46,7 +46,7 @@
     </g:each>
   </ul>
 
-  <a href="javascript:history.back()">Volver</a>
+  <a href="/formularioDeCursada/listado">Volver</a>
 
 </body>
 </html>
