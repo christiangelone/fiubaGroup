@@ -22,7 +22,7 @@
         <td style="border: 1px solid black;">Año: ${it.cuatrimestre.anio} Número: ${it.cuatrimestre.numero}</td>
         <td style="border: 1px solid black;">
         <g:if test="${it.grupo != null}">
-            <a href="/grupo/${it.grupo}">${it.grupo.nombre}</a>
+            <a href="/grupo/show/${it.grupo.id}">${it.grupo.nombre}</a>
         </g:if>
         </td>
         <td style="border: 1px solid black;">
