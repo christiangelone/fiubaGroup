@@ -6,24 +6,13 @@ class GrupoController {
 
     def armar(Integer formularioId) {
 
-        //def formulario = FormularioDeCursada.findById(formularioId)
+        def formulario = FormularioDeCursada.findById(formularioId)
 
-        def service = new GrupoService()
-
-        def alumnos = [
-            new Alumno(
-                    nombre: "Pepe",
-                    padron: 104678,
-                    mail: "pepe@fi.uba.ar",
-                    bandaHoraria: BandaHoraria.TARDE,
-                    puntuacion: 3),
-                new Alumno(
-                    nombre: "Carlos",
-                    padron: 103678,
-                    mail: "carlos@fi.uba.ar",
-                    bandaHoraria: BandaHoraria.TARDE,
-                    puntuacion: 3)
-        ]
+        def alumnos = []
+        if(formulario != null){
+            def service = new GrupoService()
+            alumnos = service.proponerAlumnos(formulario)
+        }
 
         [
             alumnos: alumnos,

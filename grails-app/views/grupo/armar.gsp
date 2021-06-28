@@ -18,7 +18,7 @@
       <br/>
       <ul>
       <g:each in="${alumnosNombres}">
-          <li>${it}</li>
+        <li>${it}</li>
       </g:each>
       </ul>
       <input type="hidden" id="alumnoIds" name="alumnoIds" value="${alumnosIdsStr}" />
@@ -37,6 +37,8 @@
       </li>
     </g:each>
   </ul>
+
+  <a href="javascript:history.back()">Volver</a>
 
 </body>
 </html>

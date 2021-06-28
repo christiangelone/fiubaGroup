@@ -13,12 +13,12 @@ class GrupoService {
                                         materia: formularioDeCursada.materia, 
                                         cuatrimestre: formularioDeCursada.cuatrimestre)
         
-        def alumnosEnLaMismaCursada = formulariosFiltrados.map{ it.alumno }
+        def alumnosEnLaMismaCursada = formulariosFiltrados.collect{ it.alumno }
 
-        def gruposDondeParticipo = Grupos.list().findAll { it.alumnos.contains(alumno) }
+        def gruposDondeParticipo = Grupo.list().findAll { it.alumnos.contains(alumno) }
 
-        def alumnosEnGruposPrevios = gruposDondeParticipo.map{ it.alumnos }.flatten().filter{ it != alumno }
+        def alumnosEnGruposPrevios = gruposDondeParticipo.collect{ it.alumnos }.flatten().findAll{ it != alumno }
 
-        return alumno.alumnosAfines(alumnosEnLaMismaCursada, alumnosEnGruposPrevios) 
+        return alumno.alumnosAfines(alumnosEnLaMismaCursada, alumnosEnGruposPrevios)
     }
 }
