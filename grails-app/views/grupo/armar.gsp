@@ -12,7 +12,7 @@
   <g:if test="${!alumnos.isEmpty()}">
     <h3>Propuesta de grupo</h3>
     <br/>
-    <form style="padding-left:20px;">
+    <form action="/grupo/procesarArmado" method="post" style="padding-left:20px;">
       <label for="nombre">Nombre</label>
       <input type="text" id="nombre" name="nombre" />
       <br/>

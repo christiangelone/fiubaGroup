@@ -31,4 +31,9 @@ class GrupoController {
         ]
     }
 
+    def procesarArmado() {
+        println(params)
+        redirect(action: "armar")
+    }
+
 }
