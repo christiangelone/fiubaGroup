@@ -28,6 +28,7 @@
         <li>${it}</li>
       </g:each>
       </ul>
+      <input type="hidden" id="formularioId" name="formularioId" value="${formularioId}" />
       <input type="hidden" id="alumnoIds" name="alumnoIds" value="${alumnosIdsStr}" />
       <button type="submit">Armar grupo</button>
     </form>

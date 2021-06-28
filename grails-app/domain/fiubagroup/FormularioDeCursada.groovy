@@ -5,7 +5,9 @@ class FormularioDeCursada {
     Alumno alumno
     Materia materia
     Cuatrimestre cuatrimestre
+    Grupo grupo
 
     static constraints = {
+        grupo nullable: true
     }
 }

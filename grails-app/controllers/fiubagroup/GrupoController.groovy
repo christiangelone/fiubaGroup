@@ -22,6 +22,7 @@ class GrupoController {
             alumnos: alumnos,
             cuatrimestre: cuatrimestre,
             materia: materia,
+            formularioId: formularioId,
             alumnosIdsStr: alumnos.inject("", { ids, alumno -> ids == "" ? alumno.nombre : ids + ",${alumno.nombre}" }),
             alumnosNombres: alumnos.collect { alumno -> alumno.nombre },
             grupos: [
