@@ -7,7 +7,7 @@
   <title>FiubaGroup</title>
 </head>
 <body>
-  <h1>Mis Formularios</h1>
+  <h1>Mis Formularios de cursada</h1>
 
   <table style="width:100%; text-align: center; border: 1px solid black;">
     <tr style="border: #000 solid 1px;">

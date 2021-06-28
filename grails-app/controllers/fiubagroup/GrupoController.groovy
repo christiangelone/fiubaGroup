@@ -11,14 +11,17 @@ class GrupoController {
         def alumnos = []
         def cuatrimestre = null
         def materia = null
+        def alumnoArmador = null
         if(formulario != null){
             def service = new GrupoService()
             alumnos = service.proponerAlumnos(formulario)
             cuatrimestre = formulario.cuatrimestre
             materia = formulario.materia
+            alumnoArmador = formulario.alumno
         }
 
         [
+            alumnoId: alumnoArmador.id,
             alumnos: alumnos,
             cuatrimestre: cuatrimestre,
             materia: materia,
@@ -34,7 +37,7 @@ class GrupoController {
 
     def procesarArmado() {
         println(params)
-        redirect(action: "armar")
+        redirect(action: "listado", controller: "formularioDeCursada", params: [alumnoId: params["alumnoId"]])
     }
 
 }
