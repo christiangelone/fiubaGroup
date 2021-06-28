@@ -7,25 +7,28 @@
   <title>FiubaGroup</title>
 </head>
 <body>
-  <h1>ARMAR</h1>
+  <h1>Armar grupo</h1>
 
-  <g:if test="${!alumnosPropuesto.isEmpty()}">
-    <form>
+  <g:if test="${!alumnos.isEmpty()}">
+    <h3>Propuesta de grupo</h3>
+    <br/>
+    <form style="padding-left:20px;">
       <label for="nombre">Nombre</label>
       <input type="text" id="nombre" name="nombre" />
       <br/>
-      <g:each in="${alumnosPropuesto}">
-          <input type="checkbox" id="alumno-${it.nombre}" name="alumno-${it.nombre}" checked>
-          <label for="alumno-${it.nombre}">${it.nombre}</label>
-          <br/>
+      <ul>
+      <g:each in="${alumnosNombres}">
+          <li>${it}</li>
       </g:each>
+      </ul>
+      <input type="hidden" id="alumnoIds" name="alumnoIds" value="${alumnosIdsStr}" />
       <button type="submit">Armar grupo</button>
     </form>
   </g:if>
   <g:else>
     </h4>No tenemos una propuesta de alumnos para armar grupo</h4>
   </g:else>
-
+  <br/>
   <h3> Grupos </h3> 
   <ul>
     <g:each in="${grupos}">
