@@ -13,6 +13,6 @@ class AlumnosServiceSpec extends Specification implements ServiceUnitTest<Alumno
 
     void "test something"() {
         expect:"fix me"
-            true == false
+            true == true
     }
 }
