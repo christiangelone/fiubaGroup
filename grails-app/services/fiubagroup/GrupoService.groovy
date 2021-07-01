@@ -21,4 +21,28 @@ class GrupoService {
 
         return alumno.alumnosAfines(alumnosEnLaMismaCursada, alumnosEnGruposPrevios)
     }
+
+    def armar(String nombre, String materiaId, String cuatrimestreId, List<Long> alumnoIds) {
+        def materia = Materia.findById(materiaId)
+        def cuatrimestre = Cuatrimestre.findById(cuatrimestreId)
+        def alumnos = Alumno.list().findAll{ alumnoIds.contains(it.id) }
+
+        def grupo = new Grupo(
+            nombre: nombre,
+            cuatrimestre: cuatrimestre,
+            materia: materia
+        )
+
+        for (alumno in alumnos) {
+            grupo.addToAlumnos(alumno)
+        }
+        
+        grupo.save()
+
+        for (alumno in alumnos) {
+            def formularioDeCursada = FormularioDeCursada.findWhere(materia: materia, alumno: alumno, cuatrimestre: cuatrimestre)
+            formularioDeCursada.grupo = grupo
+            formularioDeCursada.save()
+        }
+    }
 }

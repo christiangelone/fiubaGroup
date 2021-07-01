@@ -36,36 +36,15 @@ class GrupoController {
     }
 
     def procesarArmado() {
-        println(params)
-
-        def materia = Materia.findById(params.materiaId)
-        def cuatrimestre = Cuatrimestre.findById(params.cuatrimestreId)
+        def materiaId = params.materiaId
+        def cuatrimestreId = params.cuatrimestreId
+        def nombre = params.nombre
         def ids = params.alumnoIds.split(',').collect{ Long.valueOf(it) }
-        println(ids)
-        println(ids.first().getClass())
-        println(Alumno.list().first().id.getClass())
-        println(Alumno.list())
-        def alumnos = Alumno.list().findAll{ ids.contains(it.id) }
-        println(alumnos)
-        def grupo = new Grupo(
-            nombre: params.nombre,
-            cuatrimestre: cuatrimestre,
-            materia: materia
-        )
-
-        for (alumno in alumnos) {
-            grupo.addToAlumnos(alumno)
-        }
-        
-        grupo.save()
-
-        for (alumno in alumnos) {
-            alumno
-            def formularioDeCursada = FormularioDeCursada.findWhere(materia: materia, alumno: alumno, cuatrimestre: cuatrimestre)
-            formularioDeCursada.grupo = grupo
-            formularioDeCursada.save()
-        }
        
+        def service = new GrupoService()
+
+        service.armar(nombre, materiaId, cuatrimestreId, ids)
+
         redirect(action: "listado", controller: "formularioDeCursada", params: [alumnoId: params["alumnoId"]])
     }
 
