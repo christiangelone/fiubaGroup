@@ -7,22 +7,12 @@
   <title>FiubaGroup</title>
 </head>
 
-<script>
-  function getSelectValue()
-  {
-    document.getElementById("materiasSelect").
-  }
- </script>
-
 <body>
     <h1>Votacion de alumnos</h1>
-	<g:select name="user.age" from="${materias}" value="${codigo}"  noSelection="['':'Elije la materia']">
+    <h1>Selecciona una materia</h1>
       <g:each in="${materias}">
-        <option value="${it.codigo}">${it.codigo}</option>
+      <li><g:link class="elegirAlumno" action="elegirAlumno" params="${[alumnoId: this.alumno?.id]}">${it.codigo}</g:link></li>
       </g:each>
-    </g:select>
-
-    <li><g:link class="elegirAlumno" action="elegirAlumno" params="${[alumnoId: this.alumno?.id]}"><g:message code="Elegir materia" /></g:link></li>
     <a href="javascript:history.back()">Volver</a>
 </body>
 </html>
