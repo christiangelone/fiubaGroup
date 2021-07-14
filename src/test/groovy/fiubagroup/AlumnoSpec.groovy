@@ -105,7 +105,7 @@ class AlumnoSpec extends Specification implements DomainUnitTest<Alumno> {
             def alumnosEnGruposPrevios = [pepe1, pepe1, pepe2]
         when: 
             def alumnosAfines = alumno.alumnosAfines(alumnosEnLaMismaCursada, alumnosEnGruposPrevios)
-        then:"solo pepe1 pepe2 deben estar en la propuesta"
+        then:"solo pepe1 deben estar en la propuesta"
             alumnosAfines.size() == 1
         and:
             alumnosAfines.contains(pepe1) == true

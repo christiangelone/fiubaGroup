@@ -8,6 +8,7 @@ import spock.lang.*
 @Rollback
 class GrupoServiceSpec extends Specification {
 
+    def grupoService
 
     def setup() {
     }
@@ -63,8 +64,7 @@ class GrupoServiceSpec extends Specification {
             }
 
         when:
-            def service = new GrupoService()
-            def alumnosPropuestos = service.proponerAlumnos(formulario)
+            def alumnosPropuestos = grupoService.proponerAlumnos(formulario)
         
         then: "alumnos propuestos no vacio"
             alumnosPropuestos.isEmpty() == false

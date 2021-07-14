@@ -32,16 +32,12 @@ class GrupoService {
             cuatrimestre: cuatrimestre,
             materia: materia
         )
-
-        for (alumno in alumnos) {
-            grupo.addToAlumnos(alumno)
-        }
-        
+        grupo.agregar(alumnos)
         grupo.save()
-
-        for (alumno in alumnos) {
+        
+        alumnos.each { alumno ->
             def formularioDeCursada = FormularioDeCursada.findWhere(materia: materia, alumno: alumno, cuatrimestre: cuatrimestre)
-            formularioDeCursada.grupo = grupo
+            grupo.agregarA(formularioDeCursada) 
             formularioDeCursada.save()
         }
     }

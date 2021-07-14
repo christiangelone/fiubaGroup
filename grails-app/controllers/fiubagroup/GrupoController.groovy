@@ -4,6 +4,8 @@ class GrupoController {
 
     static scaffold = Grupo
 
+    def grupoService
+
     def armar(Integer formularioId) {
 
         def formulario = FormularioDeCursada.findById(formularioId)
@@ -13,8 +15,7 @@ class GrupoController {
         def materia = null
         def alumnoArmador = null
         if(formulario != null){
-            def service = new GrupoService()
-            alumnos = service.proponerAlumnos(formulario)
+            alumnos = grupoService.proponerAlumnos(formulario)
             cuatrimestre = formulario.cuatrimestre
             materia = formulario.materia
             alumnoArmador = formulario.alumno
@@ -40,10 +41,8 @@ class GrupoController {
         def cuatrimestreId = params.cuatrimestreId
         def nombre = params.nombre
         def ids = params.alumnoIds.split(',').collect{ Long.valueOf(it) }
-       
-        def service = new GrupoService()
 
-        service.armar(nombre, materiaId, cuatrimestreId, ids)
+        grupoService.armar(nombre, materiaId, cuatrimestreId, ids)
 
         redirect(action: "listado", controller: "formularioDeCursada", params: [alumnoId: params["alumnoId"]])
     }
