@@ -6,19 +6,19 @@ class GrupoController {
 
     def grupoService
 
-    def armar(Integer formularioId) {
+    def armar(Integer intencionDeFormarGrupoId) {
 
-        def formulario = IntencionDeCursada.findById(formularioId)
+        def intencionesDeFormarGrupo = IntencionDeFormarGrupo.findById(intencionDeFormarGrupoId)
 
         def alumnos = []
         def cuatrimestre = null
         def materia = null
         def alumnoArmador = null
-        if(formulario != null){
-            alumnos = grupoService.proponerAlumnos(formulario)
-            cuatrimestre = formulario.cuatrimestre
-            materia = formulario.materia
-            alumnoArmador = formulario.alumno
+        if(intencionesDeFormarGrupo != null){
+            alumnos = grupoService.proponerAlumnos(intencionesDeFormarGrupo)
+            cuatrimestre = intencionesDeFormarGrupo.cuatrimestre
+            materia = intencionesDeFormarGrupo.materia
+            alumnoArmador = intencionesDeFormarGrupo.alumno
         }
 
         [
@@ -26,7 +26,7 @@ class GrupoController {
             alumnos: alumnos,
             cuatrimestre: cuatrimestre,
             materia: materia,
-            formularioId: formularioId,
+			intencionDeFormarGrupo: intencionDeFormarGrupoId,
             alumnosIdsStr: alumnos.inject("", { ids, alumno -> ids == "" ? alumno.id : ids + ",${alumno.id}" }),
             alumnosNombres: alumnos.collect { alumno -> alumno.nombre },
             grupos: [
@@ -44,7 +44,7 @@ class GrupoController {
 
         grupoService.armar(nombre, materiaId, cuatrimestreId, ids)
 
-        redirect(action: "listado", controller: "formularioDeCursada", params: [alumnoId: params["alumnoId"]])
+        redirect(action: "listado", controller: "intencionDeFormarGrupo", params: [alumnoId: params["alumnoId"]])
     }
 
 }

@@ -7,7 +7,7 @@
   <title>FiubaGroup</title>
 </head>
 <body>
-  <h1>Mis Formularios de cursada</h1>
+  <h1>Mis intenciones de cursada</h1>
 
   <table style="width:100%; text-align: center; border: 1px solid black;">
     <tr style="border: #000 solid 1px;">
@@ -16,7 +16,7 @@
       <th style="border: 1px solid black;">Grupo</th>
       <th style="border: 1px solid black;">Acciones</th>
     </tr>
-    <g:each in="${formularios}">
+    <g:each in="${intenciones}">
       <tr>
         <td style="border: 1px solid black;">Codigo: ${it.materia.codigo}</td>
         <td style="border: 1px solid black;">Año: ${it.cuatrimestre.anio} Número: ${it.cuatrimestre.numero}</td>
@@ -27,7 +27,7 @@
         </td>
         <td style="border: 1px solid black;">
           <g:if test="${it.grupo == null}">
-            <a href="/grupo/armar?formularioId=${it.id}">Armar grupo</a>
+            <a href="/grupo/armar?intencionDeFormarGrupoId=${it.id}">Armar grupo</a>
           </g:if>
         </td>
       </tr>

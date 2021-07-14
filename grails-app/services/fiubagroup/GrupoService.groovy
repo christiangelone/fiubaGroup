@@ -6,14 +6,14 @@ import grails.gorm.transactions.Transactional
 class GrupoService {
 
     // buscar alumnos tengan afinidad con ese alumno solicitante del formulario recibido
-    def proponerAlumnos(IntencionDeCursada formularioDeCursada) {
-        def alumno = formularioDeCursada.alumno
+    def proponerAlumnos(IntencionDeFormarGrupo intencionDeFormarGrupo) {
+        def alumno = intencionDeFormarGrupo.alumno
 
-        def formulariosFiltrados = IntencionDeCursada.findAllWhere(
-                                        materia: formularioDeCursada.materia,
-                                        cuatrimestre: formularioDeCursada.cuatrimestre)
+        def intencionDeFormarGrupoFiltrado = IntencionDeFormarGrupo.findAllWhere(
+                                        materia: intencionDeFormarGrupo.materia,
+                                        cuatrimestre: intencionDeFormarGrupo.cuatrimestre)
 
-        def alumnosEnLaMismaCursada = formulariosFiltrados.collect{ it.alumno }
+        def alumnosEnLaMismaCursada = intencionDeFormarGrupoFiltrado.collect{ it.alumno }
 
         def gruposDondeParticipo = Grupo.list().findAll { it.alumnos.contains(alumno) }
 
@@ -36,9 +36,9 @@ class GrupoService {
         grupo.save()
 
         alumnos.each { alumno ->
-            def formularioDeCursada = IntencionDeCursada.findWhere(materia: materia, alumno: alumno, cuatrimestre: cuatrimestre)
-            grupo.agregarA(formularioDeCursada)
-            formularioDeCursada.save()
+            def intencionDeFormarGrupo = IntencionDeFormarGrupo.findWhere(materia: materia, alumno: alumno, cuatrimestre: cuatrimestre)
+            grupo.agregarA(intencionDeFormarGrupo)
+            intencionDeFormarGrupo.save()
         }
     }
 }

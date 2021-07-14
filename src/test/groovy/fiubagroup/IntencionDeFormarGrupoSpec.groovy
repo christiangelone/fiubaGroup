@@ -3,7 +3,7 @@ package fiubagroup
 import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
-class IntencionDeCursadaSpec extends Specification implements DomainUnitTest<IntencionDeCursada> {
+class IntencionDeFormarGrupoSpec extends Specification implements DomainUnitTest<IntencionDeFormarGrupo> {
 
     def setup() {
     }

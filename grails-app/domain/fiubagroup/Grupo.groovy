@@ -14,28 +14,28 @@ class Grupo {
 
     def agregar(List<Alumno> alumnos) {
         alumnos.each { alumno ->
-            chequearSiAlumnoTieneFormulariosDeCursada(alumno)
-            chequearSiAlumnoTieneFormulariosDeCursadaSinGrupo(alumno)
+            chequearSiAlumnoTieneIntencionDeFormarGrupo(alumno)
+            chequearSiAlumnoTieneIntencionDeFormarGrupoSinGrupo(alumno)
             addToAlumnos(alumno)
         }
     }
 
-    def agregarA(IntencionDeCursada formulario) {
-        formulario.grupo = this
+    def agregarA(IntencionDeFormarGrupo intencionDeFormarGrupo) {
+		intencionDeFormarGrupo.grupo = this
     }
 
-    private def chequearSiAlumnoTieneFormulariosDeCursada(alumno){
-        if(!alumno.tieneFormularioDeCursada(materia, cuatrimestre)) {
+    private def chequearSiAlumnoTieneIntencionDeFormarGrupo(alumno){
+        if(!alumno.tieneIntencionDeFormarGrupo(materia, cuatrimestre)) {
             throw new IllegalStateException(
-                "el alumno ${alumno.nombre} no tiene formulariosDeCursada " +
+                "el alumno ${alumno.nombre} no tiene intencionDeFormarGrupo " +
                 "para la materia ${materia.codigo} " +
                 "y cuatrimestre (año: ${cuatrimestre.anio}, ${cuatrimestre.numero})"
             )
         }
     }
 
-    private def chequearSiAlumnoTieneFormulariosDeCursadaSinGrupo(alumno){
-        if(!alumno.tieneFormularioDeCursadaSinGrupo(materia, cuatrimestre)) {
+    private def chequearSiAlumnoTieneIntencionDeFormarGrupoSinGrupo(alumno){
+        if(!alumno.tieneIntencionDeFormarGrupoSinGrupo(materia, cuatrimestre)) {
             throw new IllegalStateException(
                 "el alumno ${alumno.nombre} ya tiene grupo " +
                 "para la materia ${materia.codigo} " +

@@ -1,6 +1,6 @@
 package fiubagroup
 
-class IntencionDeCursada {
+class IntencionDeFormarGrupo {
     //static hasOne = [alumno: Alumno, materia: Materia, cuatrimestre:]
     Materia materia
     Cuatrimestre cuatrimestre

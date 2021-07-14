@@ -35,7 +35,7 @@ class GrupoServiceSpec extends Specification {
                 puntuacion: 2)
             alumno.save(flush:true)
 
-            def formulario = new IntencionDeCursada(
+            def formulario = new IntencionDeFormarGrupo(
                 alumno: alumno,
                 materia: materia,
                 cuatrimestre: cuatrimestre
@@ -55,7 +55,7 @@ class GrupoServiceSpec extends Specification {
             }
 
             for(a in alumnos){
-                def f = new IntencionDeCursada(
+                def f = new IntencionDeFormarGrupo(
                     alumno: a,
                     materia: materia,
                     cuatrimestre: cuatrimestre

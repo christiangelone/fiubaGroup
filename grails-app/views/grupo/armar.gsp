@@ -29,7 +29,7 @@
       </g:each>
       </ul>
       <input type="hidden" id="alumnoId" name="alumnoId" value="${alumnoId}" />
-      <input type="hidden" id="formularioId" name="formularioId" value="${formularioId}" />
+      <input type="hidden" id="intencionDeFormarGrupoId" name="intencionDeFormarGrupoId" value="${intencionDeFormarGrupoId}" />
       <input type="hidden" id="alumnoIds" name="alumnoIds" value="${alumnosIdsStr}" />
       <button type="submit">Armar grupo</button>
     </form>
@@ -38,7 +38,7 @@
     </h4>No tenemos una propuesta de alumnos para armar grupo</h4>
   </g:else>
   <br/>
-  <h3> Grupos </h3> 
+  <h3> Grupos </h3>
   <ul>
     <g:each in="${grupos}">
       <li>
@@ -47,7 +47,7 @@
     </g:each>
   </ul>
 
-  <a href="/formularioDeCursada/listado">Volver</a>
+  <a href="/intencionDeFormarGrupo/listado">Volver</a>
 
 </body>
 </html>

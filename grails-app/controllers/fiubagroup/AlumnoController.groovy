@@ -19,6 +19,6 @@ class AlumnoController {
 
     def votar() {
         println(params)
-        redirect(action: "listado", controller: "formularioDeCursada", params: [alumnoId: params["alumnoId"]])
+        redirect(action: "listado", controller: "intencionesDeCursada", params: [alumnoId: params["alumnoId"]])
     }
 }

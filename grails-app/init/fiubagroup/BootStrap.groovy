@@ -25,7 +25,7 @@ class BootStrap {
             puntuacion: 3)
         geronimo.save()
 
-        def formularioDeCursadaChristian = new IntencionDeCursada(
+        def formularioDeCursadaChristian = new IntencionDeFormarGrupo(
             materia : materia,
             alumno : christian,
             cuatrimestre : cuatrimestre
@@ -33,7 +33,7 @@ class BootStrap {
 
         formularioDeCursadaChristian.save()
 
-        def formularioDeCursadaGero = new IntencionDeCursada(
+        def formularioDeCursadaGero = new IntencionDeFormarGrupo(
             materia : materia,
             alumno : geronimo,
             cuatrimestre : cuatrimestre
