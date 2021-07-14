@@ -1,6 +1,6 @@
 package fiubagroup
 
-class FormularioDeCursada {
+class IntencionDeCursada {
     //static hasOne = [alumno: Alumno, materia: Materia, cuatrimestre:]
     Materia materia
     Cuatrimestre cuatrimestre

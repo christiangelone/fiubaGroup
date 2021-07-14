@@ -20,7 +20,7 @@ class Grupo {
         }
     }
 
-    def agregarA(FormularioDeCursada formulario) {
+    def agregarA(IntencionDeCursada formulario) {
         formulario.grupo = this
     }
 

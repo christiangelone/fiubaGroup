@@ -8,7 +8,7 @@ class Alumno {
     BandaHoraria bandaHoraria
     Integer    puntuacion
 
-    static hasMany = [formulariosDeCursada: FormularioDeCursada]
+    static hasMany = [formulariosDeCursada: IntencionDeCursada]
     static constraints = {
         puntuacion defaultValue: 3
     }
@@ -23,7 +23,7 @@ class Alumno {
     }
 
     def tieneFormularioDeCursadaSinGrupo(Materia materia, Cuatrimestre cuatrimestre) {
-        return formularioDeCursadaPara(materia, cuatrimestre)?.tieneGrupo() ?: false
+        return !formularioDeCursadaPara(materia, cuatrimestre)?.tieneGrupo() ?: false
     }
 
     def alumnosAfines(List<Alumno> alumnosEnLaMismaCursada, List<Alumno> alumnosEnGruposPrevios) {

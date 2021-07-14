@@ -25,7 +25,7 @@ class BootStrap {
             puntuacion: 3)
         geronimo.save()
 
-        def formularioDeCursadaChristian = new FormularioDeCursada(
+        def formularioDeCursadaChristian = new IntencionDeCursada(
             materia : materia,
             alumno : christian,
             cuatrimestre : cuatrimestre
@@ -33,13 +33,13 @@ class BootStrap {
 
         formularioDeCursadaChristian.save()
 
-        def formularioDeCursadaGero = new FormularioDeCursada(
+        def formularioDeCursadaGero = new IntencionDeCursada(
             materia : materia,
             alumno : geronimo,
             cuatrimestre : cuatrimestre
         )
 
-        formularioDeCursadaGero.save()                    
+        formularioDeCursadaGero.save()
     }
     def destroy = {
     }

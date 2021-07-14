@@ -8,7 +8,7 @@ class GrupoController {
 
     def armar(Integer formularioId) {
 
-        def formulario = FormularioDeCursada.findById(formularioId)
+        def formulario = IntencionDeCursada.findById(formularioId)
 
         def alumnos = []
         def cuatrimestre = null

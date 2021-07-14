@@ -35,7 +35,7 @@ class GrupoServiceSpec extends Specification {
                 puntuacion: 2)
             alumno.save(flush:true)
 
-            def formulario = new FormularioDeCursada(
+            def formulario = new IntencionDeCursada(
                 alumno: alumno,
                 materia: materia,
                 cuatrimestre: cuatrimestre
@@ -43,7 +43,7 @@ class GrupoServiceSpec extends Specification {
             formulario.save(flush:true)
 
             def alumnos = []
-            4.times { i -> 
+            4.times { i ->
                 def a = new Alumno(
                     nombre: "Alumno ${i}",
                     padron: i,
@@ -53,9 +53,9 @@ class GrupoServiceSpec extends Specification {
                 a.save(flush:true)
                 alumnos.add(a)
             }
-            
+
             for(a in alumnos){
-                def f = new FormularioDeCursada(
+                def f = new IntencionDeCursada(
                     alumno: a,
                     materia: materia,
                     cuatrimestre: cuatrimestre
@@ -65,7 +65,7 @@ class GrupoServiceSpec extends Specification {
 
         when:
             def alumnosPropuestos = grupoService.proponerAlumnos(formulario)
-        
+
         then: "alumnos propuestos no vacio"
             alumnosPropuestos.isEmpty() == false
     }
