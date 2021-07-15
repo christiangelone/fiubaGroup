@@ -41,4 +41,13 @@ class GrupoService {
             intencionDeFormarGrupo.save()
         }
     }
+
+
+	def obtenerAlumnosDelGrupo(Long grupoId, Long alumnoId) {
+		def alumno = Alumno.findById(alumnoId)
+		def grupo = Grupo.findById(grupoId)
+		def alumnosFiltrados = grupo?.alumnos
+		alumnosFiltrados?.remove(alumno)
+		return alumnosFiltrados
+	}
 }

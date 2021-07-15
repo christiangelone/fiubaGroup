@@ -22,6 +22,7 @@ class Alumno {
         return obtenerIntencionDeFormarGrupoPara(materia, cuatrimestre) != null
     }
 
+	// Todo renombrar a tieneIntencionDeFormarGrupoSinGrupoAsignado
     def tieneIntencionDeFormarGrupoSinGrupo(Materia materia, Cuatrimestre cuatrimestre) {
         return !obtenerIntencionDeFormarGrupoPara(materia, cuatrimestre)?.tieneGrupo() ?: false
     }

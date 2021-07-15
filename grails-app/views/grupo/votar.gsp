@@ -20,7 +20,7 @@
 	<br/>
 	<label>Seleccione un alumno a votar</label>
 	<br/>
-	<select for="votacion" id="alumnoVotadoId" form="votacion">
+	<select id="alumnoVotadoId" name="alumnoVotadoId" form="votacion">
 		<g:each in="${alumnos}">
 			<option value="${it.id}">${it.nombre}</option>
 		</g:each>
@@ -29,7 +29,7 @@
 	<br/>
 	<label>Seleccione una puntuacion entre 0 y 5</label>
 	<br/>
-	<select for="votacion" id="puntuacion" form="votacion">
+	<select id="puntuacion" name="puntuacion" form="votacion">
 		<g:each in="${0..5}">
 			<option value="${it}">${it} puntos</option>
 		</g:each>
@@ -38,7 +38,7 @@
 	<br/>
 	<br/>
 
-	<form id="votacion" action="/grupo/votarAlumno" method="post" style="padding-left:20px;">
+	<form id="votacion" action="/alumno/votarAlumno" method="post" style="padding-left:20px;">
 		<button type="submit">Votar alumno</button>
 	</form>
 </g:if>

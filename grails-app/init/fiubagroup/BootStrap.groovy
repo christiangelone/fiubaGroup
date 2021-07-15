@@ -40,14 +40,6 @@ class BootStrap {
         )
 
         formularioDeCursadaGero.save()
-		def grupo = new Grupo(
-				nombre: "sarasa",
-				cuatrimestre: cuatrimestre,
-				materia: materia,
-				alumnos: [geronimo, christian]
-		)
-
-		grupo.save()
     }
     def destroy = {
     }
