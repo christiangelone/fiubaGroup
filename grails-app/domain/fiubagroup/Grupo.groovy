@@ -24,6 +24,10 @@ class Grupo {
 		intencionDeFormarGrupo.grupo = this
     }
 
+	def esVotables(){
+		return cuatrimestre.estaFinalizado()
+	}
+
     private def chequearSiAlumnoTieneIntencionDeFormarGrupo(alumno){
         if(!alumno.tieneIntencionDeFormarGrupo(materia, cuatrimestre)) {
             throw new IllegalStateException(

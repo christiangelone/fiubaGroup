@@ -19,4 +19,8 @@ class IntencionDeFormarGrupo {
     def tieneGrupo(){
         return grupo != null
     }
+
+	def puedeVotarAlumnos(){
+		return cuatrimestre.estaFinalizado()
+	}
 }

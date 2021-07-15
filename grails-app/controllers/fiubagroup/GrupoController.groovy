@@ -36,6 +36,44 @@ class GrupoController {
         ]
     }
 
+	def listado(Long alumnoId){
+		def alumno = Alumno.findById(alumnoId)
+		def gruposFiltrados = Grupo.findAll().findAll {
+			it.alumnos.contains(alumno)
+		}
+		return [
+				grupos: gruposFiltrados,
+				alumnoId: alumnoId
+		]
+	}
+
+
+	def votar(Long grupoId, Long alumnoVotanteId) {
+		def grupo = Grupo.findById(grupoId)
+
+		def alumnos = grupo?.alumnos?.findAll {
+			it.id != alumnoVotanteId
+		}
+
+		def cuatrimestre = grupo?.cuatrimestre
+		def materia = grupo?.materia
+
+		[
+				alumnoId: alumnoVotanteId,
+				alumnos: alumnos,
+				cuatrimestre: cuatrimestre,
+				materia: materia
+		]
+	}
+
+	def votarAlumno(Long alumnoVotadoId, Integer puntuacion ) {
+		def alumnoVotado = Alumno.findById(alumnoVotadoId)
+		alumnoVotado.puntuar(puntuacion)
+		[
+				alumnoVotado: alumnoVotado
+		]
+	}
+
     def procesarArmado() {
         def materiaId = params.materiaId
         def cuatrimestreId = params.cuatrimestreId
