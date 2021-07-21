@@ -23,4 +23,8 @@ class IntencionDeFormarGrupo {
 	def puedeVotarAlumnos(){
 		return cuatrimestre.estaFinalizado()
 	}
+
+	def removerGrupo(){
+		setGrupo(null)
+	}
 }

@@ -37,12 +37,9 @@ class GrupoController {
 	}
 
 	def listado(Long alumnoId) {
-		def alumno = Alumno.findById(alumnoId)
-		def gruposFiltrados = Grupo.findAll {
-			it.alumnos.contains(alumno)
-		}
+		def grupos = grupoService.obtenerGrupos(alumnoId)
 		return [
-				grupos  : gruposFiltrados,
+				grupos  : grupos,
 				alumnoId: alumnoId
 		]
 	}
@@ -51,7 +48,7 @@ class GrupoController {
 	def votar(Long grupoId, Long alumnoVotanteId) {
 		def grupo = Grupo.findById(grupoId)
 
-		def alumnos = grupoService.obtenerAlumnosDelGrupo(grupoId,alumnoVotanteId) ?: []
+		def alumnos = grupoService.obtenerAlumnosDelGrupo(grupoId, alumnoVotanteId) ?: []
 
 		def cuatrimestre = grupo?.cuatrimestre
 		def materia = grupo?.materia
@@ -62,6 +59,27 @@ class GrupoController {
 				cuatrimestre: cuatrimestre,
 				materia     : materia
 		]
+	}
+
+	def abandonar(Long grupoId, Long alumnoDesertorId) {
+		def (cuatrimestre, materia) = grupoService.abandonarGrupo(grupoId, alumnoDesertorId)
+
+		[
+				cuatrimestre: cuatrimestre,
+				materia     : materia
+		]
+	}
+
+	def agregar(Long grupoId, Long alumnoId) {
+		[
+				alumnos: grupoService.proponerAlumnos(grupoId, alumnoId),
+				grupoId: grupoId
+		]
+	}
+
+	def procesarAgregado(Long grupoId, Long alumnoId) {
+		grupoService.agregarAlumno(grupoId, alumnoId)
+		redirect(action: "show", controller: "grupo", id: grupoId)
 	}
 
 	def procesarArmado() {

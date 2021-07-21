@@ -23,9 +23,24 @@
 			<td style="border: 1px solid black;">Materia: ${it.materia.codigo}</td>
 			<td style="border: 1px solid black;">Año: ${it.cuatrimestre.anio} Número: ${it.cuatrimestre.numero}</td>
 			<td style="border: 1px solid black;">
-				<g:if test="${it.esVotables()}">
-					<a href="/grupo/votar?grupoId=${it.id}&alumnoVotanteId${alumnoId}">Votar alumnos</a>
-				</g:if>
+				<ul>
+					<li>
+						<g:if test="${it.esVotables()}">
+							<a href="/grupo/votar?grupoId=${it.id}&alumnoVotanteId=${alumnoId}">Votar alumnos</a>
+						</g:if>
+					</li>
+					<li>
+
+						<a href="/grupo/abandonar?grupoId=${it.id}&alumnoDesertorId=${alumnoId}">Abandonar grupo</a>
+
+				</li>
+					<li>
+						<g:if test="${it.tieneDesertores()}">
+							<a href="/grupo/agregar?grupoId=${it.id}&alumnoId=${alumnoId}">Agregar alumno</a>
+						</g:if>
+					</li>
+				</ul>
+
 			</td>
 		</tr>
 	</g:each>

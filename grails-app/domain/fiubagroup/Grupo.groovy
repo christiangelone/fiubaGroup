@@ -7,6 +7,7 @@ class Grupo {
     String nombre
     Cuatrimestre cuatrimestre
     Materia materia
+	Integer cantidadDesertores = 0
     static hasMany = [alumnos: Alumno]
 
     static constraints = {
@@ -14,11 +15,27 @@ class Grupo {
 
     def agregar(List<Alumno> alumnos) {
         alumnos.each { alumno ->
-            chequearSiAlumnoTieneIntencionDeFormarGrupo(alumno)
-            chequearSiAlumnoTieneIntencionDeFormarGrupoSinGrupo(alumno)
-            addToAlumnos(alumno)
+            agregar(alumno)
         }
     }
+
+	def agregar(Alumno alumno) {
+		chequearSiAlumnoTieneIntencionDeFormarGrupo(alumno)
+		chequearSiAlumnoTieneIntencionDeFormarGrupoSinGrupo(alumno)
+		addToAlumnos(alumno)
+		if(cantidadDesertores > 0) {
+			cantidadDesertores--
+		}
+	}
+
+	def removerAlumno(Alumno alumno){
+		cantidadDesertores++
+		removeFromAlumnos(alumno)
+	}
+
+	def tieneDesertores(){
+		return cantidadDesertores > 0
+	}
 
     def agregarA(IntencionDeFormarGrupo intencionDeFormarGrupo) {
 		intencionDeFormarGrupo.grupo = this
