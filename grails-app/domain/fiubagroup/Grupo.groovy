@@ -37,10 +37,6 @@ class Grupo {
 		return cantidadDesertores > 0
 	}
 
-    def agregarA(IntencionDeFormarGrupo intencionDeFormarGrupo) {
-		intencionDeFormarGrupo.grupo = this
-    }
-
 	def esVotables(){
 		return cuatrimestre.estaFinalizado()
 	}

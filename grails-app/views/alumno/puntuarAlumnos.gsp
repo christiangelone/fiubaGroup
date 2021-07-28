@@ -8,9 +8,9 @@
 </head>
 
 <body>
-<h1>Votado de  alumnos</h1>
+<h1>Puntuado de  alumnos</h1>
 
 <br/>
 
-<label>Votaste exitosamente a ${alumnoVotado.nombre})</label>
+<label>Puntuaste exitosamente a ${alumnoPuntuado.nombre})</label>
 <br/>

@@ -39,6 +39,11 @@ class GrupoService {
 		return alumno.alumnosAfines(alumnosEnLaMismaCursada, alumnosEnGruposPrevios)
 	}
 
+	def proponerAlumnosFaltantes(Long grupoId, Long alumnoId){
+		def alumnos = proponerAlumnos(grupoId, alumnoId)
+		alumnos.findAll {it.id != alumnoId}
+	}
+
     def armar(String nombre, String materiaId, String cuatrimestreId, List<Long> alumnoIds) {
         def materia = Materia.findById(materiaId)
         def cuatrimestre = Cuatrimestre.findById(cuatrimestreId)
@@ -54,8 +59,7 @@ class GrupoService {
 
         alumnos.each { alumno ->
             def intencionDeFormarGrupo = IntencionDeFormarGrupo.findWhere(materia: materia, alumno: alumno, cuatrimestre: cuatrimestre)
-            grupo.agregarA(intencionDeFormarGrupo)
-            intencionDeFormarGrupo.save()
+			intencionDeFormarGrupo.setGrupo(grupo)
         }
     }
 
@@ -65,7 +69,6 @@ class GrupoService {
 		grupo.removerAlumno(alumno)
 		def intencionDeFormarGrupo = IntencionDeFormarGrupo.findWhere(materia: grupo.materia, alumno: alumno, cuatrimestre: grupo.cuatrimestre)
 		intencionDeFormarGrupo.removerGrupo()
-		intencionDeFormarGrupo.save(flush : true, failOnError: true)
 		return [grupo.cuatrimestre, grupo.materia]
 	}
 
@@ -87,7 +90,6 @@ class GrupoService {
 		def alumno = Alumno.findById(alumnoId)
 		def grupo = Grupo.findById(grupoId)
 		def alumnosFiltrados = grupo?.alumnos
-		alumnosFiltrados?.remove(alumno)
-		return alumnosFiltrados
+		return alumnosFiltrados?.findAll {it != alumno}
 	}
 }

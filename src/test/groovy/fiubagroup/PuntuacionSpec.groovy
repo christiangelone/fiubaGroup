@@ -1,9 +1,9 @@
 package fiubagroup
 
-import grails.testing.services.ServiceUnitTest
+import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
-class AlumnosServiceSpec extends Specification implements ServiceUnitTest<AlumnosService>{
+class PuntuacionSpec extends Specification implements DomainUnitTest<Puntuacion> {
 
     def setup() {
     }
@@ -13,6 +13,6 @@ class AlumnosServiceSpec extends Specification implements ServiceUnitTest<Alumno
 
     void "test something"() {
         expect:"fix me"
-            true == true
+            true == false
     }
 }

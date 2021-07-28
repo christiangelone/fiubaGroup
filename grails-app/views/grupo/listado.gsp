@@ -26,7 +26,7 @@
 				<ul>
 					<li>
 						<g:if test="${it.esVotables()}">
-							<a href="/grupo/votar?grupoId=${it.id}&alumnoVotanteId=${alumnoId}">Votar alumnos</a>
+							<a href="/grupo/puntuar?grupoId=${it.id}&alumnoPuntuadorId=${alumnoId}">Votar alumnos</a>
 						</g:if>
 					</li>
 					<li>

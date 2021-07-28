@@ -4,7 +4,8 @@ class AlumnoController {
 
     static scaffold = Alumno
 
-    def alumnosService = new AlumnosService()
+	def alumnosService
+
     def obtenerMaterias(Integer alumnoId) {
         def alumno = Alumno.findById(alumnoId)
         def materias = alumnosService.obtenerMateriasCursadas(alumnoId)
@@ -19,6 +20,18 @@ class AlumnoController {
 
     def votar() {
         println(params)
-        redirect(action: "listado", controller: "formularioDeCursada", params: [alumnoId: params["alumnoId"]])
+        redirect(action: "listado", controller: "intencionesDeCursada", params: [alumnoId: params["alumnoId"]])
     }
+
+	def votarAlumno() {
+		println(params)
+		def alumnoVotadoId = Long.valueOf(params.alumnoVotadoId)
+		def puntuacion = Integer.valueOf(params.puntuacion)
+		def alumnoVotado = Alumno.findById(alumnoVotadoId)
+		alumnoVotado.puntuar(puntuacion)
+		[
+				alumnoVotado: alumnoVotado
+		]
+	}
+
 }

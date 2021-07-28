@@ -4,11 +4,6 @@ import grails.gorm.transactions.Transactional
 
 @Transactional
 class AlumnosService {
-
-    def votarAlumno(Alumno alumno, Integer puntuacion) {
-        alumno.puntuar(puntuacion).save()
-    }
-
     def obtenerMateriasCursadas(Integer alumnoId){
         def alumno = Alumno.findById(alumnoId)
         return IntencionDeFormarGrupo.findAllByAlumno(alumno).collect{it.materia}
@@ -20,4 +15,25 @@ class AlumnosService {
         def grupo  = IntencionDeFormarGrupo.findAllWhere(alumno: alumno, materia: materia )?.first()?.grupo
         return grupo?.alumnos
     }
+
+	def puntuarAlumno(Long alumnoPuntuadoId, Long alumnoPuntuadorId, Long grupoId, Integer puntos){
+		def alumnoPuntuado = Alumno.findById(alumnoPuntuadoId)
+		def alumnoPuntuador = Alumno.findById(alumnoPuntuadorId)
+		def grupo = Grupo.findById(grupoId)
+
+		if (alumnoPuntuador.puedePuntuar(alumnoPuntuado, grupo)) {
+			def puntuacion = new Puntuacion(
+					grupo: grupo,
+					alumnoPuntuador: alumnoPuntuador,
+					alumnoPuntuado: alumnoPuntuado,
+					puntos: puntos
+			)
+			puntuacion.save()
+			alumnoPuntuado.puntuar(puntuacion)
+		} else{
+			throw new Exception("Alumno ya puntuado")
+		}
+
+		return alumnoPuntuado
+	}
 }

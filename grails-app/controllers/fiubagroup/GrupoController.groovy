@@ -45,16 +45,17 @@ class GrupoController {
 	}
 
 
-	def votar(Long grupoId, Long alumnoVotanteId) {
+	def puntuar(Long grupoId, Long alumnoPuntuadorId) {
 		def grupo = Grupo.findById(grupoId)
 
-		def alumnos = grupoService.obtenerAlumnosDelGrupo(grupoId, alumnoVotanteId) ?: []
+		def alumnos = grupoService.obtenerAlumnosDelGrupo(grupoId, alumnoPuntuadorId) ?: []
 
 		def cuatrimestre = grupo?.cuatrimestre
 		def materia = grupo?.materia
 
 		[
-				alumnoId    : alumnoVotanteId,
+				alumnoPuntuadorId    : alumnoPuntuadorId,
+				grupoId 	: grupoId,
 				alumnos     : alumnos,
 				cuatrimestre: cuatrimestre,
 				materia     : materia
@@ -72,7 +73,7 @@ class GrupoController {
 
 	def agregar(Long grupoId, Long alumnoId) {
 		[
-				alumnos: grupoService.proponerAlumnos(grupoId, alumnoId),
+				alumnos: grupoService.proponerAlumnosFaltantes(grupoId, alumnoId),
 				grupoId: grupoId
 		]
 	}

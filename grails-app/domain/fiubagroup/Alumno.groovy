@@ -6,11 +6,11 @@ class Alumno {
     Integer    padron
     String mail
     BandaHoraria bandaHoraria
-    Integer    puntuacion
+    Integer    puntuacionPromedio
 
-    static hasMany = [intencionDeFormarGrupo: IntencionDeFormarGrupo]
+    static hasMany = [intencionDeFormarGrupo: IntencionDeFormarGrupo, puntuaciones: Puntuacion]
     static constraints = {
-        puntuacion defaultValue: 3
+		puntuacionPromedio defaultValue: 3
     }
 
     def private obtenerIntencionDeFormarGrupoPara(Materia materia, Cuatrimestre cuatrimestre) {
@@ -30,25 +30,30 @@ class Alumno {
     def alumnosAfines(List<Alumno> alumnosEnLaMismaCursada, List<Alumno> alumnosEnGruposPrevios) {
 
         def alumnosConMasMenosUnoPuntuacion = alumnosEnLaMismaCursada.findAll {
-            it.puntuacion >= puntuacion - 1 && it.puntuacion <= puntuacion + 1
+            it.puntuacionPromedio >= puntuacionPromedio - 1 && it.puntuacionPromedio <= puntuacionPromedio + 1
         }
 
         def alumnosEnAlMenosDosGruposPrevios = alumnosEnGruposPrevios
                                             .groupBy { it.padron }
                                             .findAll{ k, v -> v.size() >= 2}
                                             .collect { k, v -> v[0] }
-
+		def alumnosBloqueados = puntuaciones.findAll {it.puntos == 0}.collect {it.alumnoPuntuado}
         def alumnosPropuestos = (alumnosConMasMenosUnoPuntuacion + alumnosEnAlMenosDosGruposPrevios).unique()
-        return alumnosPropuestos
+        return alumnosPropuestos.findAll{!alumnosBloqueados.contains(it)}
     }
 
-    def puntuar(Integer nuevaPuntuacion) {
-        if(nuevaPuntuacion >=1 && nuevaPuntuacion <= 5) {
-            puntuacion = (nuevaPuntuacion + puntuacion) / 2
-        }
+    def puntuar(Puntuacion puntuacion) {
+        if(puntuacion.puntos >=0 && puntuacion.puntos <= 5) {
+			def puntuacionInteger = (puntuacion.puntos + puntuacionPromedio) / 2
+            setPuntuacionPromedio(puntuacionInteger.toInteger())
+        }else{
+			throw new IllegalStateException("Puntuacion invalida: los puntos deben ser entre 0 y 5")
+		}
 
-        if(nuevaPuntuacion == 0) {
-            // Bloquear alumno
-        }
+		// TODO Ver recompesas o castigo
     }
+
+	def puedePuntuar(Alumno alumnoPuntuado, Grupo grupo){
+		return puntuaciones.findAll {it.alumnoPuntuado == alumnoPuntuado && it.grupo == grupo}.isEmpty()
+	}
 }

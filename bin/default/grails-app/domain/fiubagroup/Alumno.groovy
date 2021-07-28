@@ -8,26 +8,38 @@ class Alumno {
     BandaHoraria bandaHoraria
     Integer    puntuacion
 
-    //static hasMany: [formularioDeCursada: FormularioDeCursada]
+    static hasMany = [intencionDeFormarGrupo: IntencionDeFormarGrupo]
     static constraints = {
+        puntuacion defaultValue: 3
+    }
+
+    def private obtenerIntencionDeFormarGrupoPara(Materia materia, Cuatrimestre cuatrimestre) {
+        def formularios = this.intencionDeFormarGrupo.findAll{ f -> f.tieneCuatrimestreYMateria(materia, cuatrimestre) }
+        return formularios.size() > 0 ? formularios[0] : null
+    }
+
+    def tieneIntencionDeFormarGrupo(Materia materia, Cuatrimestre cuatrimestre) {
+        return obtenerIntencionDeFormarGrupoPara(materia, cuatrimestre) != null
+    }
+
+	// Todo renombrar a tieneIntencionDeFormarGrupoSinGrupoAsignado
+    def tieneIntencionDeFormarGrupoSinGrupo(Materia materia, Cuatrimestre cuatrimestre) {
+        return !obtenerIntencionDeFormarGrupoPara(materia, cuatrimestre)?.tieneGrupo() ?: false
     }
 
     def alumnosAfines(List<Alumno> alumnosEnLaMismaCursada, List<Alumno> alumnosEnGruposPrevios) {
 
-        return  [
-                        new Alumno(
-                                nombre: "Pepe",
-                                padron: 104678,
-                                mail: "pepe@fi.uba.ar",
-                                bandaHoraria: BandaHoraria.TARDE,
-                                puntuacion: 3),
-                            new Alumno(
-                                nombre: "Carlos",
-                                padron: 103678,
-                                mail: "carlos@fi.uba.ar",
-                                bandaHoraria: BandaHoraria.TARDE,
-                                puntuacion: 3)
-                    ]
+        def alumnosConMasMenosUnoPuntuacion = alumnosEnLaMismaCursada.findAll {
+            it.puntuacion >= puntuacion - 1 && it.puntuacion <= puntuacion + 1
+        }
+
+        def alumnosEnAlMenosDosGruposPrevios = alumnosEnGruposPrevios
+                                            .groupBy { it.padron }
+                                            .findAll{ k, v -> v.size() >= 2}
+                                            .collect { k, v -> v[0] }
+
+        def alumnosPropuestos = (alumnosConMasMenosUnoPuntuacion + alumnosEnAlMenosDosGruposPrevios).unique()
+        return alumnosPropuestos
     }
 
     def puntuar(Integer nuevaPuntuacion) {

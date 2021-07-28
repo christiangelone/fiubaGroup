@@ -14,7 +14,7 @@ class BootStrap {
             padron: 93971,
             mail: "cangelone@fi.uba.ar",
             bandaHoraria: BandaHoraria.TARDE,
-            puntuacion: 3)
+				puntuacionPromedio: 3)
         christian.save()
 
         def geronimo = new Alumno(
@@ -22,7 +22,7 @@ class BootStrap {
             padron: 93971,
             mail: "gillescas@fi.uba.ar",
             bandaHoraria: BandaHoraria.TARDE,
-            puntuacion: 3)
+				puntuacionPromedio: 3)
         geronimo.save()
 
         def formularioDeCursadaChristian = new IntencionDeFormarGrupo(

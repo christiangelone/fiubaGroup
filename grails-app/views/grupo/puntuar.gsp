@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<h1>Votado de  alumnos</h1>
+<h1>Puntuado de  alumnos</h1>
 
 <g:if test="${!alumnos?.isEmpty()}">
 	<br/>
@@ -18,9 +18,11 @@
 	<label>Cuatrimestre: (Año: ${cuatrimestre.anio} Numero: ${cuatrimestre.numero})</label>
 	<br/>
 	<br/>
-	<label>Seleccione un alumno a votar</label>
+	<label>Seleccione un alumno a puntuar</label>
 	<br/>
-	<select id="alumnoVotadoId" name="alumnoVotadoId" form="votacion">
+	<input type="hidden" name="alumnoPuntuadorId" form="puntuacion" value="${alumnoPuntuadorId}">
+	<input type="hidden" name="grupoId" form="puntuacion" value="${grupoId}">
+	<select name="alumnoPuntuadoId" form="puntuacion">
 		<g:each in="${alumnos}">
 			<option value="${it.id}">${it.nombre}</option>
 		</g:each>
@@ -29,7 +31,7 @@
 	<br/>
 	<label>Seleccione una puntuacion entre 0 y 5</label>
 	<br/>
-	<select id="puntuacion" name="puntuacion" form="votacion">
+	<select name="puntuacion" form="puntuacion">
 		<g:each in="${0..5}">
 			<option value="${it}">${it} puntos</option>
 		</g:each>
@@ -38,12 +40,12 @@
 	<br/>
 	<br/>
 
-	<form id="votacion" action="/alumno/votarAlumno" method="post" style="padding-left:20px;">
-		<button type="submit">Votar alumno</button>
+	<form id="puntuacion" action="/alumno/puntuarAlumnos" method="post" style="padding-left:20px;">
+		<button type="submit">Puntuar alumno</button>
 	</form>
 </g:if>
 <g:else>
-	</h4>No tienes alumnos disponibles para votar</h4>
+	</h4>No tienes alumnos disponibles para puntuar</h4>
 </g:else>
 <br/>
 

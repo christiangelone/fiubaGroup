@@ -18,20 +18,38 @@ class AlumnoController {
         render([alumnos: alumnos, materias: materias])
     }
 
-    def votar() {
+    def puntuar() {
         println(params)
         redirect(action: "listado", controller: "intencionesDeCursada", params: [alumnoId: params["alumnoId"]])
     }
 
-	def votarAlumno() {
-		println(params)
-		def alumnoVotadoId = Long.valueOf(params.alumnoVotadoId)
-		def puntuacion = Integer.valueOf(params.puntuacion)
-		def alumnoVotado = Alumno.findById(alumnoVotadoId)
-		alumnoVotado.puntuar(puntuacion)
-		alumnoVotado.save()
+	def puntuarAlumnos() {
+		def alumnoPuntuadoId = Long.valueOf(params.alumnoPuntuadoId)
+		def alumnoPuntuadorId = Long.valueOf(params.alumnoPuntuadorId)
+		def grupoId = Long.valueOf(params.grupoId)
+		def puntos = Integer.valueOf(params.puntuacion)
+		def alumnoPuntuado
+		try {
+			alumnoPuntuado = alumnosService.puntuarAlumno(alumnoPuntuadoId, alumnoPuntuadorId,grupoId, puntos)
+		} catch (Exception ignored) {
+			redirect(action: "alumnoYaPuntuado", controller: "alumno", params: [
+					alumnoPuntuadoId: alumnoPuntuadoId,
+					alumnoPuntuadorId: alumnoPuntuadorId
+			])
+			return
+		}
+
 		[
-				alumnoVotado: alumnoVotado
+				alumnoPuntuado: alumnoPuntuado
+		]
+	}
+
+	def alumnoYaPuntuado(){
+		def alumnoPuntuadoId = Long.valueOf(params.alumnoPuntuadoId)
+		def alumnoPuntuadorId = Long.valueOf(params.alumnoPuntuadorId)
+		[
+				alumnoPuntuado: Alumno.findById(alumnoPuntuadoId),
+				alumnoPuntuadorId: alumnoPuntuadorId
 		]
 	}
 
