@@ -19,27 +19,27 @@ class BootStrap {
 
         def geronimo = new Alumno(
             nombre: "Geronimo Illescas",
-            padron: 93971,
+            padron: 93972,
             mail: "gillescas@fi.uba.ar",
             bandaHoraria: BandaHoraria.TARDE,
 				puntuacionPromedio: 3)
         geronimo.save()
 
-        def formularioDeCursadaChristian = new IntencionDeFormarGrupo(
-            materia : materia,
-            alumno : christian,
-            cuatrimestre : cuatrimestre
-        )
+		def ignacio = new Alumno(
+				nombre: "Colombo Juan Ignacio",
+				padron: 9393,
+				mail: "Colombo@fi.uba.ar",
+				bandaHoraria: BandaHoraria.TARDE,
+				puntuacionPromedio: 3)
+		ignacio.save()
 
-        formularioDeCursadaChristian.save()
-
-        def formularioDeCursadaGero = new IntencionDeFormarGrupo(
-            materia : materia,
-            alumno : geronimo,
-            cuatrimestre : cuatrimestre
-        )
-
-        formularioDeCursadaGero.save()
+		[christian, geronimo, ignacio].forEach{
+			new IntencionDeFormarGrupo(
+					materia : materia,
+					alumno : it,
+					cuatrimestre : cuatrimestre
+			).save()
+		}
     }
     def destroy = {
     }

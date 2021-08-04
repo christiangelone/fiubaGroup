@@ -29,9 +29,20 @@ class AlumnosService {
 					puntos: puntos
 			)
 			puntuacion.save()
+			alumnoPuntuador.puntuo(puntuacion)
 			alumnoPuntuado.puntuar(puntuacion)
 		} else{
 			throw new Exception("Alumno ya puntuado")
+		}
+
+		if(grupo.todosPuntuaronA(alumnoPuntuado)){
+			if(grupo.esPenalizable(alumnoPuntuado)){
+				alumnoPuntuado.penalizar()
+			}
+
+			if(grupo.esPremiable(alumnoPuntuado)){
+				alumnoPuntuado.premiar()
+			}
 		}
 
 		return alumnoPuntuado

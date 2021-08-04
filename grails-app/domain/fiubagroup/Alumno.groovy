@@ -49,11 +49,45 @@ class Alumno {
         }else{
 			throw new IllegalStateException("Puntuacion invalida: los puntos deben ser entre 0 y 5")
 		}
-
-		// TODO Ver recompesas o castigo
     }
 
 	def puedePuntuar(Alumno alumnoPuntuado, Grupo grupo){
 		return puntuaciones.findAll {it.alumnoPuntuado == alumnoPuntuado && it.grupo == grupo}.isEmpty()
+	}
+
+	def tienePuntuacionDe(Grupo grupo, Alumno alumno) {
+		if(alumno == this)
+			return true
+		return !obtenerPuntuacionesPara(grupo, alumno).isEmpty()
+	}
+
+	def obtenerPuntosParaEste(Grupo grupo, Alumno alumno) {
+		def puntos =obtenerPuntuacionesPara(grupo, alumno).first()?.puntos
+
+		if(puntos == null){
+			throw new IllegalStateException("El alumno ${alumno.nombre} no tiene puntos para el grupo ${grupo.nombre}")
+		}
+		return puntos
+
+	}
+
+	private def obtenerPuntuacionesPara(Grupo grupo, Alumno alumno){
+		return puntuaciones.findAll {it.grupo == grupo && it.alumnoPuntuado == alumno}
+	}
+
+	def penalizar() {
+		if(puntuacionPromedio > 0) {
+			setPuntuacionPromedio(puntuacionPromedio - 1)
+		}
+	}
+
+	def premiar() {
+		if(puntuacionPromedio < 5) {
+			setPuntuacionPromedio(puntuacionPromedio + 1)
+		}
+	}
+
+	def puntuo(Puntuacion puntuacion) {
+		addToPuntuaciones(puntuacion)
 	}
 }
