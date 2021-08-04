@@ -1,27 +1,29 @@
 package fiubagroup
 
+import fiubagroup.exceptions.AlumnoYaPuntuadoException
+
 class AlumnoController {
 
-    static scaffold = Alumno
+	static scaffold = Alumno
 
 	def alumnosService
 
-    def obtenerMaterias(Integer alumnoId) {
-        def alumno = Alumno.findById(alumnoId)
-        def materias = alumnosService.obtenerMateriasCursadas(alumnoId)
-        return [alumno: alumno, materias: materias]
-    }
+	def obtenerMaterias(Integer alumnoId) {
+		def alumno = Alumno.findById(alumnoId)
+		def materias = alumnosService.obtenerMateriasCursadas(alumnoId)
+		return [alumno: alumno, materias: materias]
+	}
 
-    def elegirAlumno(Integer alumnoId, String codigoMateria) {
-        def alumno = Alumno.findById(alumnoId)
-        def alumnos = alumnosService.obtenerAlumnos(alumnoId, codigoMateria)
-        render([alumnos: alumnos, materias: materias])
-    }
+	def elegirAlumno(Integer alumnoId, String codigoMateria) {
+		def alumno = Alumno.findById(alumnoId)
+		def alumnos = alumnosService.obtenerAlumnos(alumnoId, codigoMateria)
+		render([alumnos: alumnos, materias: materias])
+	}
 
-    def puntuar() {
-        println(params)
-        redirect(action: "listado", controller: "intencionesDeCursada", params: [alumnoId: params["alumnoId"]])
-    }
+	def puntuar() {
+		println(params)
+		redirect(action: "listado", controller: "intencionesDeCursada", params: [alumnoId: params["alumnoId"]])
+	}
 
 	def puntuarAlumnos() {
 		def alumnoPuntuadoId = Long.valueOf(params.alumnoPuntuadoId)
@@ -30,10 +32,10 @@ class AlumnoController {
 		def puntos = Integer.valueOf(params.puntuacion)
 		def alumnoPuntuado
 		try {
-			alumnoPuntuado = alumnosService.puntuarAlumno(alumnoPuntuadoId, alumnoPuntuadorId,grupoId, puntos)
-		} catch (Exception ignored) {
+			alumnoPuntuado = alumnosService.puntuarAlumno(alumnoPuntuadoId, alumnoPuntuadorId, grupoId, puntos)
+		} catch (AlumnoYaPuntuadoException ignored) {
 			redirect(action: "alumnoYaPuntuado", controller: "alumno", params: [
-					alumnoPuntuadoId: alumnoPuntuadoId,
+					alumnoPuntuadoId : alumnoPuntuadoId,
 					alumnoPuntuadorId: alumnoPuntuadorId
 			])
 			return
@@ -44,11 +46,11 @@ class AlumnoController {
 		]
 	}
 
-	def alumnoYaPuntuado(){
+	def alumnoYaPuntuado() {
 		def alumnoPuntuadoId = Long.valueOf(params.alumnoPuntuadoId)
 		def alumnoPuntuadorId = Long.valueOf(params.alumnoPuntuadorId)
 		[
-				alumnoPuntuado: Alumno.findById(alumnoPuntuadoId),
+				alumnoPuntuado   : Alumno.findById(alumnoPuntuadoId),
 				alumnoPuntuadorId: alumnoPuntuadorId
 		]
 	}

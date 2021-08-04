@@ -1,5 +1,8 @@
 package fiubagroup
 
+import fiubagroup.exceptions.AlumnoConIntencionDeFormarGrupoConGrupoException
+import fiubagroup.exceptions.AlumnoSinIntencionDeFormarGrupoException
+
 class Grupo {
 
 	//static hasOne = [cuatrimestre: Cuatrimestre, materia: Materia]
@@ -43,20 +46,14 @@ class Grupo {
 
 	private def chequearSiAlumnoTieneIntencionDeFormarGrupo(alumno) {
 		if (!alumno.tieneIntencionDeFormarGrupo(materia, cuatrimestre)) {
-			throw new IllegalStateException(
-					"el alumno ${alumno.nombre} no tiene intencionDeFormarGrupo " +
-							"para la materia ${materia.codigo} " +
-							"y cuatrimestre (año: ${cuatrimestre.anio}, ${cuatrimestre.numero})"
-			)
+			throw new AlumnoSinIntencionDeFormarGrupoException(alumno, materia, cuatrimestre)
 		}
 	}
 
 	private def chequearSiAlumnoTieneIntencionDeFormarGrupoSinGrupo(alumno) {
 		if (!alumno.tieneIntencionDeFormarGrupoSinGrupo(materia, cuatrimestre)) {
-			throw new IllegalStateException(
-					"el alumno ${alumno.nombre} ya tiene grupo " +
-							"para la materia ${materia.codigo} " +
-							"y cuatrimestre (año: ${cuatrimestre.anio}, ${cuatrimestre.numero})"
+			throw new AlumnoConIntencionDeFormarGrupoConGrupoException(
+					alumno, materia, cuatrimestre
 			)
 		}
 	}
@@ -74,22 +71,22 @@ class Grupo {
 		}.flatten()
 	}
 
-	def esPenalizable(Alumno alumno){
-		if(todosPuntuaronA(alumno)) {
+	def esPenalizable(Alumno alumno) {
+		if (todosPuntuaronA(alumno)) {
 			return obtenerPuntuacionGrupalPara(alumno).inject(true) { acumulado, punto ->
 				acumulado && punto <= 2
 			}
-		}else{
+		} else {
 			return false
 		}
 	}
 
-	def esPremiable(Alumno alumno){
-		if(todosPuntuaronA(alumno)) {
+	def esPremiable(Alumno alumno) {
+		if (todosPuntuaronA(alumno)) {
 			return obtenerPuntuacionGrupalPara(alumno).inject(true) { acumulado, punto ->
 				acumulado && punto > 3
 			}
-		}else{
+		} else {
 			return false
 		}
 	}

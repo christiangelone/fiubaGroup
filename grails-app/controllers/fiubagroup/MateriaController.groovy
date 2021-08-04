@@ -2,6 +2,6 @@ package fiubagroup
 
 class MateriaController {
 
-    static scaffold = Materia
+	static scaffold = Materia
 
 }

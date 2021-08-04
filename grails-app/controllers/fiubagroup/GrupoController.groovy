@@ -54,11 +54,11 @@ class GrupoController {
 		def materia = grupo?.materia
 
 		[
-				alumnoPuntuadorId    : alumnoPuntuadorId,
-				grupoId 	: grupoId,
-				alumnos     : alumnos,
-				cuatrimestre: cuatrimestre,
-				materia     : materia
+				alumnoPuntuadorId: alumnoPuntuadorId,
+				grupoId          : grupoId,
+				alumnos          : alumnos,
+				cuatrimestre     : cuatrimestre,
+				materia          : materia
 		]
 	}
 

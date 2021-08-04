@@ -2,8 +2,8 @@ package fiubagroup
 
 class Materia {
 
-    String codigo
+	String codigo
 
-    static constraints = {
-    }
+	static constraints = {
+	}
 }

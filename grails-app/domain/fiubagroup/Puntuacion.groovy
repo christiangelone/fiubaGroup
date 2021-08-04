@@ -7,6 +7,6 @@ class Puntuacion {
 	Alumno alumnoPuntuado
 	Integer puntos
 
-    static constraints = {
-    }
+	static constraints = {
+	}
 }
