@@ -37,7 +37,7 @@ class GrupoService {
 		alumnos.findAll {alumnoAFiltrar ->  alumnoAFiltrar.id != alumnoId && !grupo.pertence(alumnoAFiltrar) }
 	}
 
-	def armar(String nombre, String materiaId, String cuatrimestreId, List<Long> alumnoIds) {
+	def formar(String nombre, String materiaId, String cuatrimestreId, List<Long> alumnoIds) {
 		def materia = Materia.findById(materiaId)
 		def cuatrimestre = Cuatrimestre.findById(cuatrimestreId)
 		def alumnos = Alumno.list().findAll { alumnoIds.contains(it.id) }

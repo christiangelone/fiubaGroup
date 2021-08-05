@@ -27,7 +27,7 @@
         </td>
         <td style="border: 1px solid black;">
           <g:if test="${it.grupo == null}">
-            <a href="/grupo/armar?intencionDeFormarGrupoId=${it.id}">Armar grupo</a>
+            <a href="/grupo/formar?intencionDeFormarGrupoId=${it.id}">Formar grupo</a>
           </g:if>
         </td>
       </tr>

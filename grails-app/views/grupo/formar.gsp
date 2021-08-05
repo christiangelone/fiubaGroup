@@ -7,12 +7,12 @@
   <title>FiubaGroup</title>
 </head>
 <body>
-  <h1>Armar grupo</h1>
+  <h1>Formar grupo</h1>
 
   <g:if test="${!alumnos.isEmpty()}">
     <h3>Propuesta de grupo</h3>
     <br/>
-    <form action="/grupo/procesarArmado" method="post" style="padding-left:20px;">
+    <form action="/grupo/procesarFormado" method="post" style="padding-left:20px;">
       <label for="nombre">Nombre</label>
       <input type="text" id="nombre" name="nombre" />
       <br/>
@@ -31,11 +31,11 @@
       <input type="hidden" id="alumnoId" name="alumnoId" value="${alumnoId}" />
       <input type="hidden" id="intencionDeFormarGrupoId" name="intencionDeFormarGrupoId" value="${intencionDeFormarGrupoId}" />
       <input type="hidden" id="alumnoIds" name="alumnoIds" value="${alumnosIdsStr}" />
-      <button type="submit">Armar grupo</button>
+      <button type="submit">Formar grupo</button>
     </form>
   </g:if>
   <g:else>
-    </h4>No tenemos una propuesta de alumnos para armar grupo</h4>
+    </h4>No tenemos una propuesta de alumnos para formar grupo</h4>
   </g:else>
   <br/>
   <h3> Grupos </h3>

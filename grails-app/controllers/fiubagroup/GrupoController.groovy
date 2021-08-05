@@ -6,23 +6,23 @@ class GrupoController {
 
 	def grupoService
 
-	def armar(Integer intencionDeFormarGrupoId) {
+	def formar(Integer intencionDeFormarGrupoId) {
 
 		def intencionesDeFormarGrupo = IntencionDeFormarGrupo.findById(intencionDeFormarGrupoId)
 
 		def alumnos = []
 		def cuatrimestre = null
 		def materia = null
-		def alumnoArmador = null
+		def alumnoFormador = null
 		if (intencionesDeFormarGrupo != null) {
 			alumnos = grupoService.proponerAlumnos(intencionesDeFormarGrupo)
 			cuatrimestre = intencionesDeFormarGrupo.cuatrimestre
 			materia = intencionesDeFormarGrupo.materia
-			alumnoArmador = intencionesDeFormarGrupo.alumno
+			alumnoFormador = intencionesDeFormarGrupo.alumno
 		}
 
 		[
-				alumnoId              : alumnoArmador.id,
+				alumnoId              : alumnoFormador.id,
 				alumnos               : alumnos,
 				cuatrimestre          : cuatrimestre,
 				materia               : materia,
@@ -78,18 +78,18 @@ class GrupoController {
 		]
 	}
 
-	def procesarAgregado(Long grupoId, Long alumnoId) {
+	def procesarFormado(Long grupoId, Long alumnoId) {
 		grupoService.agregarAlumno(grupoId, alumnoId)
 		redirect(action: "show", controller: "grupo", id: grupoId)
 	}
 
-	def procesarArmado() {
+	def procesarFormado() {
 		def materiaId = params.materiaId
 		def cuatrimestreId = params.cuatrimestreId
 		def nombre = params.nombre
 		def ids = params.alumnoIds.split(',').collect { Long.valueOf(it) }
 
-		grupoService.armar(nombre, materiaId, cuatrimestreId, ids)
+		grupoService.formar(nombre, materiaId, cuatrimestreId, ids)
 
 		redirect(action: "listado", controller: "intencionDeFormarGrupo", params: [alumnoId: params["alumnoId"]])
 	}

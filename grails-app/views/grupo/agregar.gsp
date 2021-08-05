@@ -12,14 +12,14 @@
 </head>
 
 <body>
-<h1>Armar grupo</h1>
+<h1>Formar grupo</h1>
 
 <h3>Agregar alumno al grupo</h3>
 <br/>
 <label>Alumnos:</label>
 <ul>
 	<g:each in="${alumnos}">
-		<li><g:link class="procesarAgregado" action="procesarAgregado" params="${[alumnoId: it.id, grupoId: grupoId]}">${it.nombre}</g:link></li>
+		<li><g:link class="procesarFormado" action="procesarFormadoº" params="${[alumnoId: it.id, grupoId: grupoId]}">${it.nombre}</g:link></li>
 	</g:each>
 </ul>
 <br/>
