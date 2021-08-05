@@ -9,11 +9,11 @@ class GrupoService {
 	def proponerAlumnos(IntencionDeFormarGrupo intencionDeFormarGrupo) {
 		def alumno = intencionDeFormarGrupo.alumno
 
-		def intencionDeFormarGrupoFiltrado = IntencionDeFormarGrupo.findAllWhere(
+		def intencionesDeFormarGrupoFiltrado = IntencionDeFormarGrupo.findAllWhere(
 				materia: intencionDeFormarGrupo.materia,
 				cuatrimestre: intencionDeFormarGrupo.cuatrimestre)
 
-		def alumnosEnLaMismaCursada = intencionDeFormarGrupoFiltrado.collect { it.alumno }
+		def alumnosEnLaMismaCursada = intencionesDeFormarGrupoFiltrado.collect { it.alumno }
 
 		def gruposDondeParticipo = Grupo.list().findAll { it.alumnos.contains(alumno) }
 
@@ -22,26 +22,19 @@ class GrupoService {
 		return alumno.alumnosAfines(alumnosEnLaMismaCursada, alumnosEnGruposPrevios)
 	}
 
-	def proponerAlumnos(Long grupoId, Long alumnoId) {
-		def grupo = Grupo.findById(grupoId)
-		def alumno = Alumno.findById(alumnoId)
-
-		def intencionDeFormarGrupoFiltrado = IntencionDeFormarGrupo.findAllWhere(
+	private def proponerAlumnosEnBaseA(Grupo grupo, Alumno alumno) {
+		def intencionDeFormarGrupo = IntencionDeFormarGrupo.findAllWhere(
 				materia: grupo.materia,
-				cuatrimestre: grupo.cuatrimestre)
-
-		def alumnosEnLaMismaCursada = intencionDeFormarGrupoFiltrado.collect { it.alumno }
-
-		def gruposDondeParticipo = Grupo.list().findAll { it.alumnos.contains(alumno) }
-
-		def alumnosEnGruposPrevios = gruposDondeParticipo.collect { it.alumnos }.flatten().findAll { it != alumno }
-
-		return alumno.alumnosAfines(alumnosEnLaMismaCursada, alumnosEnGruposPrevios)
+				cuatrimestre: grupo.cuatrimestre,
+				alumno: alumno).first()
+		return proponerAlumnos(intencionDeFormarGrupo)
 	}
 
 	def proponerAlumnosFaltantes(Long grupoId, Long alumnoId) {
-		def alumnos = proponerAlumnos(grupoId, alumnoId)
-		alumnos.findAll { it.id != alumnoId }
+		def grupo = Grupo.findById(grupoId)
+		def alumno = Alumno.findById(alumnoId)
+		def alumnos = proponerAlumnosEnBaseA(grupo, alumno)
+		alumnos.findAll {alumnoAFiltrar ->  alumnoAFiltrar.id != alumnoId && !grupo.pertence(alumnoAFiltrar) }
 	}
 
 	def armar(String nombre, String materiaId, String cuatrimestreId, List<Long> alumnoIds) {

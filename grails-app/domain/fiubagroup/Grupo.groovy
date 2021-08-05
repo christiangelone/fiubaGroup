@@ -90,4 +90,8 @@ class Grupo {
 			return false
 		}
 	}
+
+	def pertence(Alumno alumno) {
+		return alumnos.contains(alumno)
+	}
 }
