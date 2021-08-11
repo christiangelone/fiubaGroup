@@ -1,53 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>FiubaGroup</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="layout" content="main"/>
+    <title>FiubaGroup</title>
 </head>
 
 <body>
-<h1>Mis grupos</h1>
 
-<table style="width:100%; text-align: center; border: 1px solid black;">
-	<tr style="border: #000 solid 1px;">
-		<th style="border: 1px solid black;">Nombre</th>
-		<th style="border: 1px solid black;">Materia</th>
-		<th style="border: 1px solid black;">Cuatrimeste</th>
-		<th style="border: 1px solid black;">Acciones</th>
-	</tr>
-	<g:each in="${grupos}">
-		<tr>
-			<td style="border: 1px solid black;">Nombre: ${it.nombre}</td>
-			<td style="border: 1px solid black;">Materia: ${it.materia.codigo}</td>
-			<td style="border: 1px solid black;">Año: ${it.cuatrimestre.anio} Número: ${it.cuatrimestre.numero}</td>
-			<td style="border: 1px solid black;">
-				<ul>
-					<li>
-						<g:if test="${it.esVotables()}">
-							<a href="/grupo/puntuar?grupoId=${it.id}&alumnoPuntuadorId=${alumnoId}">Votar alumnos</a>
-						</g:if>
-					</li>
-					<li>
+<div id="list-intenciones" class="content scaffold-list" role="main">
+    <h1>Mis grupos</h1>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Materia</th>
+            <th>Cuatrimeste</th>
+            <th>Acciones</th>
+        </tr>
+        <g:each in="${grupos}">
+            <tr class="${(it.id % 2 == 0) ? 'odd' : 'even'}">
+                <td>Nombre: ${it.nombre}</td>
+                <td>Materia: ${it.materia.codigo}</td>
+                <td>Año: ${it.cuatrimestre.anio} Número: ${it.cuatrimestre.numero}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <g:if test="${it.esVotables()}">
+                                <a href="/grupo/puntuar?grupoId=${it.id}&alumnoPuntuadorId=${alumnoId}">Votar alumnos</a>
+                            </g:if>
+                        </li>
+                        <li>
 
-						<a href="/grupo/abandonar?grupoId=${it.id}&alumnoDesertorId=${alumnoId}">Abandonar grupo</a>
+                            <a href="/grupo/abandonar?grupoId=${it.id}&alumnoDesertorId=${alumnoId}">Abandonar grupo</a>
 
-				</li>
-					<li>
-						<g:if test="${it.tieneDesertores()}">
-							<a href="/grupo/agregar?grupoId=${it.id}&alumnoId=${alumnoId}">Agregar alumno</a>
-						</g:if>
-					</li>
-				</ul>
+                        </li>
+                        <g:if test="${it.tieneDesertores()}">
+                            <li>
+                                <a href="/grupo/agregar?grupoId=${it.id}&alumnoId=${alumnoId}">Agregar alumno</a>
+                            </li>
+                        </g:if>
+                    </ul>
 
-			</td>
-		</tr>
-	</g:each>
-</table>
-
+                </td>
+            </tr>
+        </g:each>
+    </table>
+</div>
 <br/>
-<a href="javascript:history.back()">Volver</a>
 
+<div class="nav" role="navigation">
+    <a class="home" href="javascript:history.back()">Volver<g:message></g:message></a>
+</div>
 </body>
 </html>

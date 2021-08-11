@@ -8,16 +8,20 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-	<title></title>
+    <meta name="layout" content="main"/>
+    <title>FiubaGroup</title>
 </head>
 
 <body>
-<h1>Abandono de grupos</h1>
+<div id="content" role="main">
+    <h1>Abandono de grupos</h1>
 
-<br/>
+    <h3>Abandonaste exitosamente el grupo de la materia ${materia.codigo} del cuatrimestre ${cuatrimestre.numero}-${cuatrimestre.anio}</h3>
+</div>
 
-<label>Abandonaste exitosamente el grupo de la materia ${materia.codigo} del cuatrimestre ${cuatrimestre.numero}-${cuatrimestre.anio}</label>
-<br/>
+<div class="nav" role="navigation">
+    <a class="home" href="/grupo">Volver<g:message></g:message></a>
+</div>
 
 </body>
 </html>

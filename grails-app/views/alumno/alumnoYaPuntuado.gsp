@@ -8,18 +8,22 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-	<title></title>
+    <meta name="layout" content="main"/>
+    <title>FiubaGroup</title>
 </head>
 
 <body>
-<h1>Puntuado de  alumnos</h1>
+<div id="content" role="main">
+    <section class="row colset-2-its">
+        <h1>Puntuado de  alumnos</h1>
+        <h3>Ya puntuaste a ${alumnoPuntuado.nombre}</h3>
+    </section>
+</div>
 
-<br/>
-
-<label>Ya puntuaste a ${alumnoPuntuado.nombre}</label>
-<br/>
-
-<a href="/grupo/listado?alumnoId=${alumnoPuntuadorId}">Volver</a>
-
+<div class="nav" role="navigation">
+    <div class="nav" role="navigation">
+        <a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a>
+    </div>
+</div>
 </body>
 </html>

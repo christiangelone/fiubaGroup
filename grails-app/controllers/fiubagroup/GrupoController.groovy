@@ -78,7 +78,7 @@ class GrupoController {
 		]
 	}
 
-	def procesarFormado(Long grupoId, Long alumnoId) {
+	def procesarAgregarAlumno(Long grupoId, Long alumnoId) {
 		grupoService.agregarAlumno(grupoId, alumnoId)
 		redirect(action: "show", controller: "grupo", id: grupoId)
 	}
