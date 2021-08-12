@@ -9,7 +9,7 @@
 
 <body>
 
-<div id="list-intenciones" class="content scaffold-list" role="main">
+<div id="list-grupo" class="content scaffold-list" role="main">
     <h1>Mis grupos</h1>
     <table>
         <tr>
@@ -25,11 +25,13 @@
                 <td>Año: ${it.cuatrimestre.anio} Número: ${it.cuatrimestre.numero}</td>
                 <td>
                     <ul>
+                        <g:if test="${it.esVotables()}">
                         <li>
-                            <g:if test="${it.esVotables()}">
+
                                 <a href="/grupo/puntuar?grupoId=${it.id}&alumnoPuntuadorId=${alumnoId}">Votar alumnos</a>
-                            </g:if>
+
                         </li>
+                        </g:if>
                         <li>
 
                             <a href="/grupo/abandonar?grupoId=${it.id}&alumnoDesertorId=${alumnoId}">Abandonar grupo</a>

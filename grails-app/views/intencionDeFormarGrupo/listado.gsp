@@ -9,7 +9,7 @@
 
 <body>
 <div id="list-intenciones" class="content scaffold-list" role="main">
-    <h1>Mis intenciones de cursada</h1>
+    <h1>Mis intenciones de formar grupo</h1>
     <table>
         <tr>
             <th>Materia</th>
@@ -37,7 +37,7 @@
 </div>
 
 <div class="nav" role="navigation">
-    <a class="home" href="javascript:history.back()">Volver<g:message></g:message></a>
+    <a class="home" href="/intencionDeFormarGrupo">Volver<g:message></g:message></a>
 </div>
 
 </body>

@@ -11,6 +11,6 @@ class Cuatrimestre {
 	}
 
 	def estaFinalizado() {
-		return anio <= obtenerCuatrimestreActual().anio && numero <= obtenerCuatrimestreActual().numero
+		return anio <= obtenerCuatrimestreActual().anio && numero < obtenerCuatrimestreActual().numero
 	}
 }

@@ -6,8 +6,14 @@ class BootStrap {
         def materia = new Materia(codigo : "7174")
         materia.save()
 
+        def materiaSecundaria = new Materia(codigo : "7174")
+        materiaSecundaria.save()
+
         def cuatrimestre = new Cuatrimestre(numero : 1, anio : 2021)
         cuatrimestre.save()
+
+        def cuatrimestreSecundario = new Cuatrimestre(numero : 2, anio : 2021)
+        cuatrimestreSecundario.save()
 
         def christian = new Alumno(
             nombre: "Christian Angelone",
@@ -39,6 +45,12 @@ class BootStrap {
 					alumno : it,
 					cuatrimestre : cuatrimestre
 			).save()
+
+            new IntencionDeFormarGrupo(
+                    materia : materiaSecundaria,
+                    alumno : it,
+                    cuatrimestre : cuatrimestreSecundario
+            ).save()
 		}
     }
     def destroy = {
