@@ -15,6 +15,12 @@
 <h3>Puntuaste exitosamente a ${alumnoPuntuado.nombre}</h3>
 
 <br/>
+
+<div class="nav" role="navigation">
+    <div class="nav" role="navigation">
+        <a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a>
+    </div>
+</div>
 </body>
 </html>
 
